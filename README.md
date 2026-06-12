@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  A CUDA-accelerated re-implementation of <a href="https://github.com/QiuJueqin/fast-openISP">fast-openISP</a>,
+  A GPU-accelerated re-implementation of <a href="https://github.com/QiuJueqin/fast-openISP">fast-openISP</a>,
   aiming to push an image signal processing pipeline onto the GPU for real-time throughput.
   <br>
   <a href="https://github.com/moesay/hyperISP/issues/new">Report bug</a>
