@@ -7,12 +7,13 @@
 struct BlcKernelParams
 {
     int32_t bl_r, bl_gr, bl_gb, bl_b;
-    int32_t alpha, beta;  // x1024 fixed-point
+    int32_t alpha, beta;
     uint16_t sat_value;
-    uint8_t r_row, r_col;    // position of R  in the 2×2 Bayer tile
-    uint8_t gr_row, gr_col;  // position of Gr in the 2×2 Bayer tile
-    uint8_t gb_row, gb_col;  // position of Gb in the 2×2 Bayer tile
-    uint8_t b_row, b_col;    // position of B  in the 2×2 Bayer tile
+    // Position of each pixel in the 2x2 bayer tile
+    uint8_t r_row, r_col;
+    uint8_t gr_row, gr_col;
+    uint8_t gb_row, gb_col;
+    uint8_t b_row, b_col;
 };
 
 class BlcBlock : public IspBlock
