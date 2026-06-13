@@ -30,6 +30,7 @@ add_executable(hyperISP
     src/blocks/blc.cu
     src/blocks/aaf.cu
     src/blocks/awb.cu
+    src/blocks/cfa.cu
 )
 
 target_compile_options(hyperISP PRIVATE

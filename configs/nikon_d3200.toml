@@ -48,7 +48,7 @@ r_gain         = 2415  # x1024  (mirrors awb.r_gain)
 b_gain         = 1168  # x1024  (mirrors awb.b_gain)
 
 [cfa]
-mode = "malvar"
+mode = "bilinear" # possible inputs [malvar, bilinear]
 
 [ccm]
 
