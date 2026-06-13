@@ -84,7 +84,7 @@ Running times for each stage on a 1920x1080, 12-bit RGGB frame, compared against
 | DPC    | 0.29 s                    | 1.9 ms                  | 152.6x         |
 | BLC    | 0.02 s                    | 0.024 ms                 | 833.3x         |
 | AAF    | 0.08 s                    | 0.9 ms                  | 88.8x         |
-| AWB    | 0.02 s                    |[x]                  |         |
+| AWB    | 0.02 s                    | 0.038                  | 526.3x         |
 | CNF    | 0.25 s                    |[x]                  |         |
 | CFA    | 0.20 s                    |[x]                  |         |
 | CCM    | 0.06 s                    |[x]                  |         |
