@@ -86,7 +86,7 @@ Running times for each stage on a 1920x1080, 12-bit RGGB frame, compared against
 | AAF    | 0.08 s                    | 0.9 ms                  | 88.8x         |
 | AWB    | 0.02 s                    | 0.03 ms                  | 526.3x         |
 | CFA    | 0.20 s                    | 0.94 ms                  | 212.7x         |
-| CNF    | 0.25 s                    | 0.7 ms                  | 357.1 x         |
+| CNF    | 0.25 s                    | 0.7 ms                  | 357.1x         |
 | CCM    | 0.06 s                    |[x]                  |         |
 | GAC    | 0.07 s                    |[x]                  |         |
 | CSC    | 0.06 s                    |[x]                  |         |
