@@ -30,6 +30,7 @@ add_executable(hyperISP
     src/blocks/blc.cu
     src/blocks/aaf.cu
     src/blocks/awb.cu
+    src/blocks/cnf.cu
     src/blocks/cfa.cu
 )
 

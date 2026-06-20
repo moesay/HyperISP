@@ -12,6 +12,7 @@
 #include <blocks/awb.hpp>
 #include <blocks/blc.hpp>
 #include <blocks/cfa.hpp>
+#include <blocks/cnf.hpp>
 #include <blocks/dpc.hpp>
 #include <config.hpp>
 #include <frame.hpp>
@@ -37,6 +38,7 @@ build_pipeline(const IspConfig& cfg, cudaStream_t stream = 0)
     add_if_enabled(std::make_unique<BlcBlock>(cfg, stream));
     add_if_enabled(std::make_unique<AafBlock>(cfg, stream));
     add_if_enabled(std::make_unique<AwbBlock>(cfg, stream));
+    add_if_enabled(std::make_unique<CnfBlock>(cfg, stream));
     add_if_enabled(std::make_unique<CfaBlock>(cfg, stream));
 
     return pipeline;
