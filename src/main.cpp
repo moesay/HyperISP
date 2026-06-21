@@ -11,9 +11,11 @@
 #include <blocks/aaf.hpp>
 #include <blocks/awb.hpp>
 #include <blocks/blc.hpp>
+#include <blocks/ccm.hpp>
 #include <blocks/cfa.hpp>
 #include <blocks/cnf.hpp>
 #include <blocks/dpc.hpp>
+#include <blocks/gac.hpp>
 #include <config.hpp>
 #include <frame.hpp>
 #include <frames_io.hpp>
@@ -40,6 +42,8 @@ build_pipeline(const IspConfig& cfg, cudaStream_t stream = 0)
     add_if_enabled(std::make_unique<AwbBlock>(cfg, stream));
     add_if_enabled(std::make_unique<CnfBlock>(cfg, stream));
     add_if_enabled(std::make_unique<CfaBlock>(cfg, stream));
+    add_if_enabled(std::make_unique<CcmBlock>(cfg, stream));
+    add_if_enabled(std::make_unique<GacBlock>(cfg, stream));
 
     return pipeline;
 }
@@ -128,7 +132,12 @@ main(int argc, char* argv[])
 
     if (data.rgb_hdr)
     {
-        save_rgb(*data.rgb_hdr, "./output/rgb_out.raw");
+        save_rgb(*data.rgb_hdr, "./output/rgb_out_hdr.raw");
+    }
+
+    if (data.rgb_sdr)
+    {
+        save_rgb(*data.rgb_sdr, "./output/rgb_out_sdr.raw");
     }
 
     return EXIT_SUCCESS;
