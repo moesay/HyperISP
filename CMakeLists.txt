@@ -34,6 +34,7 @@ add_executable(hyperISP
     src/blocks/cfa.cu
     src/blocks/ccm.cu
     src/blocks/gac.cu
+    src/blocks/csc.cu
 )
 
 target_compile_options(hyperISP PRIVATE

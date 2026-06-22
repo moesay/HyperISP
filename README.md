@@ -65,7 +65,7 @@ Mirroring the fast-openISP pipeline, the following stages are planned:
 - [x] **CNF** — Chroma Noise Filtering
 - [x] **CCM** — Color Correction Matrix
 - [x] **GAC** — Gamma Correction
-- [ ] **CSC** — Color Space Conversion
+- [x] **CSC** — Color Space Conversion
 - [ ] **NLM** — Non-Local Means Denoising
 - [ ] **BNF** — Bilateral Noise Filtering
 - [ ] **CEH** — Contrast Enhancement
@@ -82,14 +82,14 @@ Running times for each stage on a 1920x1080, 12-bit RGGB frame, compared against
 | Block| fast-openISP | HyperISP | Speedup |
 |:------:|:-------------------:|:----------------:|:-------:|
 | DPC    | 0.29 s                    | 1.9 ms                  | 152.6x         |
-| BLC    | 0.02 s                    | 0.02 ms                 | 833.3x         |
+| BLC    | 0.02 s                    | 0.02 ms                 | 1000x         |
 | AAF    | 0.08 s                    | 0.9 ms                  | 88.8x         |
-| AWB    | 0.02 s                    | 0.03 ms                  | 526.3x         |
+| AWB    | 0.02 s                    | 0.03 ms                  | 666.7x         |
 | CFA    | 0.20 s                    | 0.94 ms                  | 212.7x         |
 | CNF    | 0.25 s                    | 0.7 ms                  | 357.1x         |
 | CCM    | 0.06 s                    | 0.7 ms                  | 85.7x         |
 | GAC    | 0.07 s                    | 0.4 ms                  | 175x         |
-| CSC    | 0.06 s                    |[x]                  |         |
+| CSC    | 0.06 s                    | 0.8 ms                  | 75x          |
 | NLM    | 5.37 s                    |[x]                  |         |
 | BNF    | 0.75 s                    |[x]                  |         |
 | CEH    | 0.14 s                    |[x]                  |         |

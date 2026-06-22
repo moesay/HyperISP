@@ -14,6 +14,7 @@
 #include <blocks/ccm.hpp>
 #include <blocks/cfa.hpp>
 #include <blocks/cnf.hpp>
+#include <blocks/csc.hpp>
 #include <blocks/dpc.hpp>
 #include <blocks/gac.hpp>
 #include <config.hpp>
@@ -44,6 +45,7 @@ build_pipeline(const IspConfig& cfg, cudaStream_t stream = 0)
     add_if_enabled(std::make_unique<CfaBlock>(cfg, stream));
     add_if_enabled(std::make_unique<CcmBlock>(cfg, stream));
     add_if_enabled(std::make_unique<GacBlock>(cfg, stream));
+    add_if_enabled(std::make_unique<CscBlock>(cfg, stream));
 
     return pipeline;
 }
@@ -138,6 +140,11 @@ main(int argc, char* argv[])
     if (data.rgb_sdr)
     {
         save_rgb(*data.rgb_sdr, "./output/rgb_out_sdr.raw");
+    }
+
+    if (data.ycbcr)
+    {
+        save_rgb(*data.ycbcr, "./output/ycbcr_out.raw");
     }
 
     return EXIT_SUCCESS;
