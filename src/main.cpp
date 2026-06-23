@@ -3,6 +3,7 @@
 // Author: Mohamed ElKafafy (m.elsayed4420@gmail.com)
 // Licensed under the GNU General Public License v3.0 (GPL-3.0)
 
+#include <algorithm>
 #include <cstdlib>
 #include <memory>
 #include <print>
@@ -17,6 +18,7 @@
 #include <blocks/csc.hpp>
 #include <blocks/dpc.hpp>
 #include <blocks/gac.hpp>
+#include <blocks/nlm.hpp>
 #include <config.hpp>
 #include <frame.hpp>
 #include <frames_io.hpp>
@@ -28,12 +30,26 @@ build_pipeline(const IspConfig& cfg, cudaStream_t stream = 0)
 {
     std::vector<std::unique_ptr<IspBlock>> pipeline;
 
-    auto add_if_enabled = [&](std::unique_ptr<IspBlock> block)
+    auto add_if_enabled = [&](std::unique_ptr<IspBlock> block, const std::string& dependancy = "")
     {
         auto it = cfg.block_enable_status.find(block->name());
         if (it != cfg.block_enable_status.end() && it->second)
         {
-            pipeline.push_back(std::move(block));
+            if (dependancy.empty())
+            {
+                pipeline.push_back(std::move(block));
+            }
+            else
+            {
+                const auto i_it = std::find_if(pipeline.begin(), pipeline.end(),
+                                               [=](const std::unique_ptr<IspBlock>& i_block)
+                { return i_block->name() == dependancy; });
+
+                if (i_it != pipeline.end())
+                {
+                    pipeline.push_back(std::move(block));
+                }
+            }
         }
     };
 
@@ -46,6 +62,7 @@ build_pipeline(const IspConfig& cfg, cudaStream_t stream = 0)
     add_if_enabled(std::make_unique<CcmBlock>(cfg, stream));
     add_if_enabled(std::make_unique<GacBlock>(cfg, stream));
     add_if_enabled(std::make_unique<CscBlock>(cfg, stream));
+    add_if_enabled(std::make_unique<NlmBlock>(cfg, stream), "csc");
 
     return pipeline;
 }
