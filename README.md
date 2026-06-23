@@ -66,7 +66,7 @@ Mirroring the fast-openISP pipeline, the following stages are planned:
 - [x] **CCM** — Color Correction Matrix
 - [x] **GAC** — Gamma Correction
 - [x] **CSC** — Color Space Conversion
-- [ ] **NLM** — Non-Local Means Denoising
+- [x] **NLM** — Non-Local Means Denoising
 - [ ] **BNF** — Bilateral Noise Filtering
 - [ ] **CEH** — Contrast Enhancement
 - [ ] **EEH** — Edge Enhancement
@@ -90,7 +90,7 @@ Running times for each stage on a 1920x1080, 12-bit RGGB frame, compared against
 | CCM    | 0.06 s                    | 0.7 ms                  | 85.7x         |
 | GAC    | 0.07 s                    | 0.4 ms                  | 175x         |
 | CSC    | 0.06 s                    | 0.8 ms                  | 75x          |
-| NLM    | 5.37 s                    |[x]                  |         |
+| NLM    | 5.37 s                    | 24.8 ms                  | 216.5x         |
 | BNF    | 0.75 s                    |[x]                  |         |
 | CEH    | 0.14 s                    |[x]                  |         |
 | EEH    | 0.24 s                    |[x]                  |         |
@@ -113,8 +113,10 @@ cd hyperISP
 
 # Configure and build
 cmake -S . -B build
-cmake --build build
+# If CMake have some problems with C++23, manually pass the standard flags
+cmake -S . -B build -DCMAKE_CUDA_COMPILER=<cuda_path>/cuda-13.3/bin/nvcc -DCMAKE_CXX_STANDARD=23
 
+cmake --build build
 # Run on the default config and test RAW
 ./build/cudaISP configs/nikon_d3200.toml
 ```
