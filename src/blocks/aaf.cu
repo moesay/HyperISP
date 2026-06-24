@@ -6,7 +6,7 @@
 #include <memory>
 #include <stdexcept>
 
-#include "blocks/aaf.hpp"
+#include "aaf.hpp"
 
 AafBlock::AafBlock(const IspConfig& cfg, cudaStream_t stream) : IspBlock(cfg, stream) {}
 

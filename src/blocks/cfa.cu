@@ -5,7 +5,9 @@
 
 #include <stdexcept>
 
-#include "blocks/cfa.hpp"
+#include <toml++/toml.hpp>
+
+#include "cfa.hpp"
 
 namespace
 {

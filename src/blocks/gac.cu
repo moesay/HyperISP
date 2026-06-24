@@ -9,7 +9,9 @@
 #include <thrust/iterator/counting_iterator.h>
 #include <thrust/transform.h>
 
-#include "blocks/gac.hpp"
+#include <toml++/toml.hpp>
+
+#include "gac.hpp"
 
 namespace
 {

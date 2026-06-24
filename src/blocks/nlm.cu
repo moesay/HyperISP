@@ -8,14 +8,16 @@
 #include <string>
 #include <vector>
 
-#include "blocks/nlm.hpp"
+#include <toml++/toml.hpp>
+
+#include "nlm.hpp"
 
 #define NLM_MAX_PATCH 15
 
 namespace
 {
 
-constexpr int32_t kLutSize = 255 * 255;
+constexpr int32_t LUT_SIZE = 255 * 255;
 
 NlmKernelParams
 make_params(const IspConfig& cfg)
@@ -32,7 +34,7 @@ make_params(const IspConfig& cfg)
     NlmKernelParams kernel_params{};
     kernel_params.search_window_size = get_int("search_window_size");
     kernel_params.patch_size = get_int("patch_size");
-    kernel_params.lut_size = kLutSize;
+    kernel_params.lut_size = LUT_SIZE;
 
     if (kernel_params.search_window_size <= 0 || kernel_params.search_window_size % 2 == 0)
     {
@@ -47,15 +49,15 @@ make_params(const IspConfig& cfg)
     }
 
     const double h = static_cast<double>(get_int("h"));
-    std::vector<int32_t> host_lut(kLutSize);
+    std::vector<int32_t> host_lut(LUT_SIZE);
 
-    for (int32_t d = 0; d < kLutSize; ++d)
+    for (int32_t d = 0; d < LUT_SIZE; ++d)
     {
         host_lut[d] = static_cast<int32_t>(1024.0 * std::exp(-static_cast<double>(d) / (h * h)));
     }
 
     int32_t* device_lut = nullptr;
-    cudaError_t err = cudaMalloc(&device_lut, kLutSize * sizeof(int32_t));
+    cudaError_t err = cudaMalloc(&device_lut, LUT_SIZE * sizeof(int32_t));
     if (err != cudaSuccess)
     {
         throw std::runtime_error(std::string("NlmBlock: cudaMalloc failed: ") +
@@ -63,7 +65,7 @@ make_params(const IspConfig& cfg)
     }
 
     err =
-        cudaMemcpy(device_lut, host_lut.data(), kLutSize * sizeof(int32_t), cudaMemcpyHostToDevice);
+        cudaMemcpy(device_lut, host_lut.data(), LUT_SIZE * sizeof(int32_t), cudaMemcpyHostToDevice);
     if (err != cudaSuccess)
     {
         cudaFree(device_lut);

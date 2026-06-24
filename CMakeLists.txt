@@ -9,13 +9,13 @@ include(FetchContent)
 FetchContent_Declare(
     tomlplusplus
     GIT_REPOSITORY https://github.com/marzer/tomlplusplus.git
-    GIT_TAG        v3.4.0
+    GIT_TAG v3.4.0
 )
 FetchContent_MakeAvailable(tomlplusplus)
 
-add_executable(hyperISP
-    src/main.cpp
+add_library(hyperisp STATIC
     src/config.cpp
+    src/pipeline.cpp
     src/blocks/dpc.cu
     src/blocks/blc.cu
     src/blocks/aaf.cu
@@ -28,13 +28,13 @@ add_executable(hyperISP
     src/blocks/nlm.cu
 )
 
-target_compile_options(hyperISP PRIVATE
+target_compile_options(hyperisp PRIVATE
     $<$<AND:$<COMPILE_LANGUAGE:CUDA>,$<CONFIG:Debug>>:-g -G>
 )
 
-target_include_directories(hyperISP PRIVATE include)
-target_link_libraries(hyperISP PRIVATE tomlplusplus::tomlplusplus)
+target_include_directories(hyperisp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(hyperisp PUBLIC tomlplusplus::tomlplusplus)
 
-set_target_properties(hyperISP PROPERTIES
+set_target_properties(hyperisp PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
 )

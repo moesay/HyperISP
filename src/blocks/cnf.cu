@@ -7,7 +7,9 @@
 #include <memory>
 #include <stdexcept>
 
-#include "blocks/cnf.hpp"
+#include <toml++/toml.hpp>
+
+#include "cnf.hpp"
 
 namespace
 {

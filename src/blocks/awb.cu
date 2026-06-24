@@ -5,7 +5,9 @@
 
 #include <stdexcept>
 
-#include "blocks/awb.hpp"
+#include <toml++/toml.hpp>
+
+#include "awb.hpp"
 
 namespace
 {

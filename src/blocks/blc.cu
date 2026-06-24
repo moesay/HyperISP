@@ -6,7 +6,9 @@
 #include <cctype>
 #include <stdexcept>
 
-#include "blocks/blc.hpp"
+#include <toml++/toml.hpp>
+
+#include "blc.hpp"
 
 namespace
 {

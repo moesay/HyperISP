@@ -5,7 +5,7 @@
 
 #include <stdexcept>
 
-#include "blocks/csc.hpp"
+#include "csc.hpp"
 
 namespace
 {

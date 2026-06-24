@@ -6,12 +6,24 @@
 #include <stdexcept>
 #include <string>
 
+#include <toml++/toml.hpp>
+
 #include <config.hpp>
+
+IspConfig::IspConfig() = default;
+IspConfig::~IspConfig() = default;
+IspConfig::IspConfig(IspConfig&&) noexcept = default;
+IspConfig& IspConfig::operator=(IspConfig&&) noexcept = default;
 
 const toml::table*
 IspConfig::block_params(const std::string& name) const
 {
-    if (auto* node = raw.get(name))
+    if (!raw_)
+    {
+        return nullptr;
+    }
+
+    if (auto* node = raw_->get(name))
     {
         return node->as_table();
     }
@@ -33,7 +45,6 @@ IspConfig::load(const std::string& path)
     }
 
     IspConfig cfg;
-    cfg.raw = tbl;
 
     if (auto* status = tbl["block_enable_status"].as_table())
     {
@@ -70,6 +81,8 @@ IspConfig::load(const std::string& path)
     {
         throw std::runtime_error("Config missing hardware.bayer_pattern");
     }
+
+    cfg.raw_ = std::make_unique<toml::table>(std::move(tbl));
 
     return cfg;
 }

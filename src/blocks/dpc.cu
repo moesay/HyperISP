@@ -5,7 +5,9 @@
 
 #include <stdexcept>
 
-#include "blocks/dpc.hpp"
+#include <toml++/toml.hpp>
+
+#include "dpc.hpp"
 
 namespace
 {
