@@ -67,7 +67,7 @@ Mirroring the fast-openISP pipeline, the following stages are planned:
 - [x] **GAC** — Gamma Correction
 - [x] **CSC** — Color Space Conversion
 - [x] **NLM** — Non-Local Means Denoising
-- [ ] **BNF** — Bilateral Noise Filtering
+- [x] **BNF** — Bilateral Noise Filtering
 - [ ] **CEH** — Contrast Enhancement
 - [ ] **EEH** — Edge Enhancement
 - [ ] **FCS** — False Color Suppression
@@ -91,7 +91,7 @@ Running times for each stage on a 1920x1080, 12-bit RGGB frame, compared against
 | GAC    | 0.07 s                    | 0.4 ms                  | 175x         |
 | CSC    | 0.06 s                    | 0.8 ms                  | 75x          |
 | NLM    | 5.37 s                    | 24.8 ms                  | 216.5x         |
-| BNF    | 0.75 s                    |[x]                  |         |
+| BNF    | 0.75 s                    | 1.6 ms                  | 469x         |
 | CEH    | 0.14 s                    |[x]                  |         |
 | EEH    | 0.24 s                    |[x]                  |         |
 | FCS    | 0.08 s                    |[x]                  |         |
@@ -117,8 +117,14 @@ cmake -S . -B build
 cmake -S . -B build -DCMAKE_CUDA_COMPILER=<cuda_path>/cuda-13.3/bin/nvcc -DCMAKE_CXX_STANDARD=23
 
 cmake --build build
-# Run on the default config and test RAW
-./build/cudaISP configs/nikon_d3200.toml
+```
+
+After building `libhyperisp.a`, you can build the example
+```bash
+# Configure and build the example/s
+cmake -S examples/ -B examples/build -DCMAKE_CUDA_COMPILER=<cuda_path>/cuda-13.3/bin/nvcc -DCMAKE_CXX_STANDARD=23
+cmake --build examples/build/
+./examples/build/hyperisp_example -c configs/nikon_d3200.toml -r test_raws/test.raw
 ```
 
 ## Configuration

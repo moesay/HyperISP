@@ -26,6 +26,7 @@ add_library(hyperisp STATIC
     src/blocks/gac.cu
     src/blocks/csc.cu
     src/blocks/nlm.cu
+    src/blocks/bnf.cu
 )
 
 target_compile_options(hyperisp PRIVATE

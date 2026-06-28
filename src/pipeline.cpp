@@ -11,6 +11,7 @@
 #include "blocks/aaf.hpp"
 #include "blocks/awb.hpp"
 #include "blocks/blc.hpp"
+#include "blocks/bnf.hpp"
 #include "blocks/ccm.hpp"
 #include "blocks/cfa.hpp"
 #include "blocks/cnf.hpp"
@@ -52,6 +53,7 @@ IspPipeline::IspPipeline(const IspConfig& cfg, cudaStream_t stream) : stream_(st
     add_if_enabled(std::make_unique<GacBlock>(cfg, stream));
     add_if_enabled(std::make_unique<CscBlock>(cfg, stream));
     add_if_enabled(std::make_unique<NlmBlock>(cfg, stream), "csc");
+    add_if_enabled(std::make_unique<BnfBlock>(cfg, stream), "csc");
 }
 
 IspPipeline::~IspPipeline()
