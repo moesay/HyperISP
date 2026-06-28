@@ -38,6 +38,7 @@ scl = false
 [bnf]
 intensity_sigma = 0.5
 spatial_sigma = 0.40000000000000002
+kernel_size = 5
 
 [ccm]
 matrix = [ [ 1896, -811, -62, 0 ], [ -160, 1687, -503, 0 ], [ 18, -557, 1563, 0 ] ]
